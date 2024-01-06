@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: mariadb
+    image: mariadb:10
+    ports:
+      - ${DATABASE_PORT}:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+    restart: on-failure
+    volumes:
+      - ../.infra/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
