@@ -29,4 +29,4 @@ COPY ./prisma/schema.prisma ./prisma/schema.prisma
 COPY ./prisma/migrations/ ./prisma/migrations/
 RUN npx prisma generate
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start:prod-migrate"]
