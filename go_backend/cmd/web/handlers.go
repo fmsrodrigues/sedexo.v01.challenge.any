@@ -37,8 +37,7 @@ func (app *application) quote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	freteRapido := &FreteRapidoAPI{}
-	offers, err := freteRapido.FetchQuoteOffers(body.Recipient, body.Volumes)
+	offers, err := app.freteRapido.FetchQuoteOffers(body.Recipient, body.Volumes)
 	if err != nil {
 		app.serverError(w, err)
 		return

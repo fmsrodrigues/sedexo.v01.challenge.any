@@ -10,14 +10,17 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	"sedexo.v01.challenge.any/internal/models"
+
+	"sedexo.v01.challenge.any/internal/repositories"
 )
 
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
 
-	offers *models.OfferModel
+	offers repositories.OffersRepository
+
+	freteRapido FreteRapido
 }
 
 func openDB(dsn string) (*sql.DB, error) {
@@ -50,9 +53,10 @@ func main() {
 	defer db.Close()
 
 	app := &application{
-		errorLog: errorLog,
-		infoLog:  infoLog,
-		offers:   &models.OfferModel{DB: db},
+		errorLog:    errorLog,
+		infoLog:     infoLog,
+		offers:      &repositories.RawOffersRepository{DB: db},
+		freteRapido: &FreteRapidoAPI{},
 	}
 
 	svr := &http.Server{

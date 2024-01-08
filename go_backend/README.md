@@ -16,7 +16,7 @@ You can also run some http requests using the REST client extension for vscode. 
 
 ## Running the tests
 
-To run the tests you can run the following command in the go_backend folder:
+To run the tests you can run the following command in the go_backend cmd/web or helper folders:
 
 ```bash
   go test

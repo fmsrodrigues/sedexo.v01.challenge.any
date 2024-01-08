@@ -24,7 +24,7 @@ type QuoteOffer struct {
 }
 
 type FreteRapido interface {
-	FetchQuoteOffers(Recipient, []Volume) (QuoteOffer, error)
+	FetchQuoteOffers(Recipient, []Volume) (*QuoteOffer, error)
 }
 
 type DispatcherFetchQuoteOffersResponseBody struct {
@@ -153,5 +153,48 @@ func (f *FreteRapidoAPI) FetchQuoteOffers(recipient Recipient, volumes []Volume)
 	return &QuoteOffer{
 		Quote:  resBody.Dispatchers[0].ID,
 		Offers: offers,
+	}, nil
+}
+
+type FreteRapidoMock struct{}
+
+func (f *FreteRapidoMock) FetchQuoteOffers(Recipient, []Volume) (*QuoteOffer, error) {
+	return &QuoteOffer{
+		Quote: "mocked-quote",
+		Offers: []Offer{
+			{
+				Carrier:  "JADLOG",
+				Service:  ".PACKAGE",
+				Deadline: 13,
+				Price:    35.99,
+			},
+			{Carrier: "CORREIOS", Service: "PAC", Deadline: 15, Price: 44.96},
+			{Carrier: "CORREIOS", Service: "SEDEX", Deadline: 11, Price: 74.17},
+			{
+				Carrier:  "BTU BRASPRESS",
+				Service:  "Normal",
+				Deadline: 15,
+				Price:    93.35,
+			},
+			{Carrier: "CORREIOS", Service: "PAC", Deadline: 15, Price: 112.96},
+			{
+				Carrier:  "CORREIOS",
+				Service:  "SEDEX",
+				Deadline: 11,
+				Price:    205.54,
+			},
+			{
+				Carrier:  "PRESSA FR (TESTE)",
+				Service:  "Normal",
+				Deadline: 11,
+				Price:    1599.39,
+			},
+			{
+				Carrier:  "PRESSA FR (TESTE)",
+				Service:  "Normal",
+				Deadline: 11,
+				Price:    1599.39,
+			},
+		},
 	}, nil
 }
