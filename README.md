@@ -37,4 +37,4 @@ I recommend reading through the `README.md` file in each folder to run this appl
 
 ### Go implementation:
 - started at 2024-01-05
-- finished at T2024-01-08
+- finished at 2024-01-08
