@@ -7,7 +7,7 @@ After creating and filling the env file on `./go_backend/.env`, you can run the 
 ```bash
   docker-compose up -d
   go mod download
-  go run ,/cmd/web
+  go run ./cmd/web
 ```
 
 Now you can access the backend at `http://localhost:3334` or in the port that you set on the `.env` file. The database is also mapped to your machine, so you can access it with your favorite database manager.
